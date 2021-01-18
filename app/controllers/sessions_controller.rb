@@ -1,6 +1,12 @@
 class SessionsController < ApplicationController
 
     def welcome
+        # byebug
+        if session[:user_id]
+            redirect_to '/users'
+        else
+            render :welcome
+        end
     end
 
     def new 
@@ -9,7 +15,7 @@ class SessionsController < ApplicationController
 
     def destroy 
         session.delete(:user_id)
-        redirect_to '/login'
+        redirect_to '/'
     end
 
     def create 
