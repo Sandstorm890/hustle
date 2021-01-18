@@ -1,16 +1,24 @@
+  
 <!DOCTYPE html>
 <html>
   <head>
     <title>Hustle</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
 
-  <body>
+  </head>
+  
+
+  <body class="l-box">
+    <div>
+      <%= link_to "All Jobs", jobs_path %> |
+      <%= link_to "Post a New Job", new_job_path %> | 
+    </div>
+  <%=show_logged_in%>
+
+
     <%= yield %>
   </body>
 </html>
