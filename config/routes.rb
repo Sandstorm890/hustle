@@ -10,8 +10,6 @@ Rails.application.routes.draw do
   post '/signup', to: 'users#create'
 
   resources :users
-  resources :employers do
-    resources :jobs
-  end
+  
   resources :jobs
 end
