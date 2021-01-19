@@ -1,2 +1,4 @@
 <h1>Post New Job</h1>
 
+<%= render partial: "job_type_fields", locals: {job: @job}%>
+<%= render partial: "job_form", locals: {job: @job} %>
