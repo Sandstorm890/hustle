@@ -1,0 +1,8 @@
+<%= render partial: "layouts/error", locals: {object: @job}  %>
+
+
+<%= form_for([@user, @job]) do |f| %>
+    <%= f.label "Category" %> 
+
+    <%= f.submit %> 
+<% end %>
