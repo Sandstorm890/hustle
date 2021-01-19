@@ -6,8 +6,10 @@ Rails.application.routes.draw do
   post '/login', to: 'sessions#create'
   delete '/logout', to: 'sessions#destroy'
 
-  get '/signup', to: 'users#new'
-  post '/signup', to: 'users#create'
+  get '/user_signup', to: 'users#new'
+  post '/user_signup', to: 'users#create'
+  get '/employer_signup', to: 'employers#new'
+  post '/employer_signup', to: 'employers#create'
 
   resources :users
   
