@@ -14,7 +14,7 @@
   <body class="l-box">
     <div>
       <%= link_to "Jobs", jobs_path %> |
-      <%= link_to "Post a New Job", new_job_path if current_user_is_employer? %> |
+      <%= link_to "Post a Job", new_job_path if current_user_is_employer? %>
       <br><br><%= button_to "Logout", logout_path, method: 'delete' %> 
     </div>
   <%=show_logged_in%>
