@@ -6,20 +6,25 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
   </head>
   
 
   <body class="l-box">
     <div>
-      <%= link_to "Jobs", jobs_path %> |
-      <%= link_to "Post a Job", new_job_path if employer? %>
-      <br><br><%= button_to "Logout", logout_path, method: 'delete' %> 
+      <%= link_to "Jobs", jobs_path if logged_in? %> |
+      <%= link_to "Post a Job", new_job_path if employer? %> |
+      <%= link_to "Home", employer_path(current_user.id) if employer? %>
+      <%= link_to "Home", user_path(current_user.id) if worker? %>
+
+
     </div>
-  <%=show_logged_in%>
+  <%= show_logged_in %>
 
 
     <%= yield %>
+
+    <br><br><%= button_to "Logout", logout_path, method: 'delete' if logged_in?%>
   </body>
 </html>
