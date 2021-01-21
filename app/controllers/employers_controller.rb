@@ -9,10 +9,8 @@ class EmployersController < ApplicationController
 
     def create
         @employer = Employer.new(employer_params)
-        byebug
         if @employer.save
             session[:employer_id] = @employer.id
-            byebug
             redirect_to employer_path(@employer)
         else
             render :new
