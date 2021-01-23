@@ -26,4 +26,8 @@ module ApplicationHelper
         worker? || employer?
     end
 
+    def tool_owned?(tool)
+        current_user.tools.include?(tool)
+    end
+
 end
