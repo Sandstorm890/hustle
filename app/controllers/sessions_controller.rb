@@ -3,6 +3,8 @@ class SessionsController < ApplicationController
     def welcome
         if session[:user_id]
             redirect_to '/users'
+        elsif session[:employer_id]
+            redirect_to '/employers'
         else
             render :welcome
         end
@@ -20,7 +22,6 @@ class SessionsController < ApplicationController
 
     def create 
         if user = User.find_by(email: params[:email])
-            
             if user && user.authenticate(params[:password])
                 session[:user_id] = user.id
                 redirect_to user_path(user)
