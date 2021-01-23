@@ -18,6 +18,10 @@ module ApplicationHelper
         !!session[:employer_id]
     end
 
+    def user_created_job?(job)
+        job.employer.id == session[:employer_id]
+    end
+
     def worker?
         !!session[:user_id]
     end 
