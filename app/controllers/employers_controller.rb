@@ -9,7 +9,8 @@ class EmployersController < ApplicationController
 
     def create
         @employer = Employer.new(employer_params)
-        if @employer.save
+        if @employer.valid?
+            @employer.save
             session[:employer_id] = @employer.id
             redirect_to employer_path(@employer)
         else
@@ -35,6 +36,6 @@ class EmployersController < ApplicationController
     private
 
     def employer_params
-        params.require(:employer).permit(:name, :username, :email, :password, :bio)
+        params.require(:employer).permit(:name, :username, :email, :password, :bio, :company)
     end
 end
