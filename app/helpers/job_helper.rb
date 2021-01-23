@@ -1,11 +1,15 @@
 module JobHelper
 
     def current_job
-        @job = Job.find_by(id: params[:id])
+        if params[:employer_id]
+            @job = Job.find_by(id: params[:employer_id])
+        else
+            @job = Job.find_by(id: params[:id])
+        end
     end
 
     def user_posted?
-        current_job.employer_id == session[:employer_id]
+        current_job.employer == current_user
     end
 
     def render_poster
@@ -21,5 +25,13 @@ module JobHelper
             content_tag(:p, "Signed Up")
         end
     end
+
+    def all_jobs
+        @jobs = Job.all
+    end
+
+    # def employer_of_current_job(job)
+    #     @employer = Employer.find_by(id: job.employer_id)
+    # end
 
 end
