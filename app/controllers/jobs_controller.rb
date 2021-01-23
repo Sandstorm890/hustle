@@ -1,37 +1,40 @@
 class JobsController < ApplicationController
     def index
-        @jobs = Job.all
+        @jobs = Job.order(:category)
     end
 
     def new
-        @job = Job.new
-        @employer = Employer.find_by(id: session[:employer_id])
-    end
-
-    def create
-        @job = Job.new(jobs_params)
-        
-        @job.employer = current_user
-        
-        @job.employer_id = current_user.id # this is probably redundant
-        
-        if @job.save
-            redirect_to employer_job_path(current_user, @job)
+    
+        if params[:employer_id] && !Employer.exists?(params[:employer_id])
+            redirect_to jobs_path, alert: "Employer not found."
         else
-            render :show
+            @job = Job.new(employer_id: params[:employer_id])
         end
     end
 
-    def sign_up_for_job
-        job = Job.find_by(id: params[:job_id])
-        job.users << current_user
-        job.save
-        current_user.save
-        redirect_to job_path(job)
+    def create
+        job = Job.new(jobs_params)
+        job.employer = current_user
+        if job.valid?
+            job.save
+            redirect_to employer_job_path(current_user, job)
+        else
+            render :new
+        end
     end
 
-    def remove_from_job
+    def edit
+        if current_user.id == session[:employer_id]
+            @job = Job.find_by(id: params[:id])
+            render :edit
+        else
+            redirect_to user_path(current_user)
+        end
+    end
+
+    def add_or_remove_from_job
         job = Job.find_by(id: params[:job_id])
+        
         if job.users.include?(current_user)
             job.users.each do |user|
                 if user == current_user
@@ -39,23 +42,38 @@ class JobsController < ApplicationController
                 end
             end
             job.save
+        elsif !job.users.include?(current_user)
+            job.users << current_user
+            job.save
+            current_user.save
         end
         redirect_to job_path(job)
     end
 
     def show
-        if params[:employer_id]  
-            @job = Job.find_by(employer_id: params[:id])
+        if params[:employer_id]
+            employer = Employer.find_by(id: params[:employer_id])
+            if employer.nil?
+                redirect_to jobs_path, alert: "Employer not found"
+            else
+                @job = employer.jobs.find_by(id: params[:id])
+                redirect_to employer_jobs_path(employer), alert: "Job not found" if @job.nil?
+            end
         else
             @job = Job.find_by(id: params[:id])
         end
     end
 
+    def sort_by_rate
+        @jobs = Job.order_by_rate
+        render :index
+    end
+
     def update
         @job = Job.find(params[:id])
-        @job.update(jobs_params)
         if @job.valid?
-            redirect_to jobs_path 
+            @job.update(jobs_params)
+            redirect_to employer_path(current_user)
         else
             render :edit 
         end
@@ -64,7 +82,6 @@ class JobsController < ApplicationController
     def destroy
         if current_job.employer == current_user
             current_job.delete
-            redirect_to jobs_path
         end
         redirect_to jobs_path
     end
