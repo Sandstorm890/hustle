@@ -10,11 +10,14 @@ Rails.application.routes.draw do
   post '/user_signup', to: 'users#create'
   get '/employer_signup', to: 'employers#new'
   post '/employer_signup', to: 'employers#create'
-  post '/sign_user_up', to: 'jobs#sign_up_for_job'
-  post '/remove_from_job', to: 'jobs#remove_from_job'
+  post '/sign_user_up', to: 'jobs#add_or_remove_from_job'
+  get '/jobs/sort_by_rate', to: 'jobs#sort_by_rate'
 
   resources :users
   resources :employers do
+    resources :jobs
+  end
+  resources :users do
     resources :jobs
   end
   resources :employers
