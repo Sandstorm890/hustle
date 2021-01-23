@@ -5,6 +5,7 @@ class ToolsController < ApplicationController
     end
 
     def update
+        
         tool = current_tool
         if tool.users.include?(current_user)
             tool.users.delete(current_user)
