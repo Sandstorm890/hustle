@@ -1,6 +1,7 @@
 class EmployersController < ApplicationController
     
     def index
+        render :show
     end
 
     def new
@@ -19,7 +20,13 @@ class EmployersController < ApplicationController
     end
 
     def show
-        @employer = Employer.find(params[:id])
+        if params[:id].to_i != session[:employer_id]
+            redirect_to jobs_path
+        else
+            employer = Employer.find_by(id: params[:id])
+            @job = employer.jobs.find_by(id: params[:id])
+            render :show
+        end
     end
 
     def update
