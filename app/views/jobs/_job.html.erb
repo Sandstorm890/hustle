@@ -1,1 +1,1 @@
-<p><%= link_to(job.category + " - " + job.start_date.to_s, job_path(job.id) ) %></p>
+<p><%= link_to(job.employer.company + " - " + job.category + " - " + job.start_date.to_s, job_path(job.id) ) %></p>
