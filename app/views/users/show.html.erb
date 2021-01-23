@@ -1,4 +1,1 @@
-<h3>Your Jobs: </h3>
-<% current_user.jobs.each do |job| %>
-    <p><%= link_to(job.employer.company + " - " + job.start_date.to_s, job_path(job)) if job.users.include?(current_user) %></p>
-<%end%>
+<%= render partial: "jobs" %>
