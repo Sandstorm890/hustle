@@ -10,9 +10,13 @@ class JobsController < ApplicationController
 
     def create
         @job = Job.new(jobs_params)
-        @job.employer_id = session[:employer_id]
+        
+        @job.employer = current_user
+        
+        @job.employer_id = current_user.id # this is probably redundant
+        
         if @job.save
-            redirect_to job_path(@job)
+            redirect_to employer_job_path(current_user, @job)
         else
             render :show
         end
@@ -22,6 +26,7 @@ class JobsController < ApplicationController
         job = Job.find_by(id: params[:job_id])
         job.users << current_user
         job.save
+        current_user.save
         redirect_to job_path(job)
     end
 
@@ -39,7 +44,11 @@ class JobsController < ApplicationController
     end
 
     def show
-        @job = Job.find_by(id: params[:id])
+        if params[:employer_id]  
+            @job = Job.find_by(employer_id: params[:id])
+        else
+            @job = Job.find_by(id: params[:id])
+        end
     end
 
     def update
@@ -53,19 +62,18 @@ class JobsController < ApplicationController
     end
 
     def destroy
+        if current_job.employer == current_user
+            current_job.delete
+            redirect_to jobs_path
+        end
+        redirect_to jobs_path
     end
 
     private
 
     def jobs_params
-        params.require(:job).permit(:category, :start_date, :end_date, :rate, :requirements, :user_id, :employer_id)
+        params.require(:job).permit(:category, :start_date, :end_date, :rate, :requirements, :user_id, :employer_id, :address)
     end
 
-    def current_user
-        if session[:employer_id]
-            @employer = Employer.find_by(id: session[:employer_id])
-        else
-            @user = User.find_by(id: session[:user_id])
-        end
-    end
+    
 end
