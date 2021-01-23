@@ -1,15 +1,14 @@
-<%= render_poster %>
 
 <%= @job.category %><br><br>
+<%= @job.address %><br><br>
 <%= @job.start_date %><br><br>
 <%= @job.end_date %><br><br>
 <%= @job.rate %><br><br>
 <p>Current Crew:</p>
     <% if !!@job.users %>
         <% @job.users.each do |user| %>
-            <p><%= user.name %></p><br><br>
+            <p><%= user.name %></p>
         <% end %>
-        
     <% end %>
 <% if !@job.users.include?(current_user) && worker? %>
     <%= button_to 'Sign Up', {:controller => "jobs", :action => "sign_up_for_job", :job_id => params[:id]} , :method=>:post %>
