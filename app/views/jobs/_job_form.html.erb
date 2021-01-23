@@ -1,6 +1,8 @@
 <%= form_for([@employer, @job]) do |f| %>
-    <h3> Select a Job Category: </h3>
-    <%= f.select :category, ["Construction", "IT", "Catering"] %><br><br>
+    <%= f.label "Address:" %><br><br>
+    <%= f.text_field :address %><br><br>
+    <%= f.label "Category:" %>
+    <%= f.select :category, ["Construction", "Landscaping", "IT", "Computer Repair", "Catering"] %><br><br>
     <%= f.label "Start Date:" %><br><br>
     <%= f.date_select :start_date %><br><br>
     <%= f.time_select :start_date, :ignore_date => true %><br><br>
