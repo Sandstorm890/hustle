@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_023606) do
+ActiveRecord::Schema.define(version: 2021_01_23_063532) do
 
   create_table "employers", force: :cascade do |t|
     t.string "name"
@@ -61,6 +61,15 @@ ActiveRecord::Schema.define(version: 2021_01_23_023606) do
     t.integer "user_id"
   end
 
+  create_table "tools_users", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "tool_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["tool_id"], name: "index_tools_users_on_tool_id"
+    t.index ["user_id"], name: "index_tools_users_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "username"
@@ -71,15 +80,6 @@ ActiveRecord::Schema.define(version: 2021_01_23_023606) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tool_id"
     t.integer "job_id"
-  end
-
-  create_table "users_tools", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "tool_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["tool_id"], name: "index_users_tools_on_tool_id"
-    t.index ["user_id"], name: "index_users_tools_on_user_id"
   end
 
 end
