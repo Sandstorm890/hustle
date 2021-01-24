@@ -6,11 +6,11 @@
 
 <%= (button_to 'Add/Remove Job', {:controller => "jobs", :action => "add_or_remove_from_job", :job_id => params[:id]} , :method=>:post) if worker?%><br>
 
-<p>Current Crew:</p>
-    <% if !!@job.users %>
-        <% @job.users.each do |user| %>
-            <p><%= user.username %></p>
-        <% end %>
+<% if @job.users.any? %>
+    <p>Current Crew:</p>
+    <% @job.users.each do |user| %>
+        <p><%= user.username %></p>
     <% end %>
+<% end %>
 
-<%= link_to 'Edit Job', edit_job_path(@job) if user_created_job?(@job)%>
+<%= link_to 'Edit Job', edit_job_path(@job) if user_created_job?(@job)%><br><br>

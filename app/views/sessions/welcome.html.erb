@@ -1,9 +1,10 @@
 
-<h1>Welcome to Hustle!</h1>
+<h1>Welcome to Hustle!</h1><br>
 <h4>
-    <%= link_to 'Log In', '/login' %><br>
-    <%= link_to 'Sign Up as Worker', '/user_signup' %><br>
-    <%= link_to 'Sign Up as Employer', '/employer_signup' %><br><br>
+    <%= link_to 'Log In', '/login' %><br><br>
+    <p>Sign Up As: </p>
+    <%= link_to 'Worker', '/user_signup' %><br>
+    <%= link_to 'Employer', '/employer_signup' %><br><br>
 </h4>
 
 <%= button_to "Sign In with Google", '/auth/google_oauth2', class: "btn btn-primary"  %>

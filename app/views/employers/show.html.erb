@@ -1,4 +1,4 @@
 <h3>Your Jobs: </h3>
 <% all_jobs.each do |job| %>
-    <p><%= link_to(job.employer.company + " - " + job.address + " - " + job.start_date.to_s, employer_job_path(current_user, job)) if job.employer == current_user %></p>
+    <p><%= link_to(job.employer.company + " - " + job.address + " - " + start_date(job), employer_job_path(current_user, job)) if job.employer == current_user %></p>
 <%end%>
