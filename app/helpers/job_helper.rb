@@ -30,6 +30,14 @@ module JobHelper
         @jobs = Job.all
     end
 
+    def start_date(job)
+        job.start_date.strftime("%A, %b %e, at %l:%M %p")
+    end
+
+    def end_date(job)
+        job.end_date.strftime("%A, %b %e, at %l:%M %p")
+    end
+
     # def employer_of_current_job(job)
     #     @employer = Employer.find_by(id: job.employer_id)
     # end
