@@ -10,10 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_23_063532) do
+ActiveRecord::Schema.define(version: 2021_01_24_005743) do
 
   create_table "employers", force: :cascade do |t|
-    t.string "name"
     t.string "email"
     t.string "password_digest"
     t.string "company"
@@ -22,6 +21,8 @@ ActiveRecord::Schema.define(version: 2021_01_23_063532) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "bio"
     t.integer "job_id"
+    t.string "first_name"
+    t.string "last_name"
   end
 
   create_table "jobs", force: :cascade do |t|
@@ -71,7 +72,6 @@ ActiveRecord::Schema.define(version: 2021_01_23_063532) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
     t.string "username"
     t.string "password_digest"
     t.string "email"
@@ -80,6 +80,10 @@ ActiveRecord::Schema.define(version: 2021_01_23_063532) do
     t.datetime "updated_at", precision: 6, null: false
     t.integer "tool_id"
     t.integer "job_id"
+    t.string "uid"
+    t.string "provider"
+    t.string "first_name"
+    t.string "last_name"
   end
 
 end
