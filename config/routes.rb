@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   post '/employer_signup', to: 'employers#create'
   post '/sign_user_up', to: 'jobs#add_or_remove_from_job'
   get '/jobs/sort_by_rate', to: 'jobs#sort_by_rate'
+  get '/auth/:provider/callback' => 'sessions#omniauth'
 
   resources :users
   resources :employers do
