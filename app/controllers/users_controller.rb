@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-
+    layout :resolve_layout
     def index
         render :show
     end
@@ -40,6 +40,15 @@ class UsersController < ApplicationController
     end
 
     private
+
+    def resolve_layout
+        case action_name
+        when "new", "create"
+            "sessions"
+        else
+            "application"
+        end
+    end
 
     def user_params
         params.require(:user).permit(:first_name, :last_name, :username, :email, :password, :bio, :uid)
