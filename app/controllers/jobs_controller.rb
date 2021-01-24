@@ -14,11 +14,9 @@ class JobsController < ApplicationController
     end
 
     def create
-
         @job = Job.new(jobs_params)
         @job.employer = current_user
         if @job.valid?
-            
             @job.save
             redirect_to employer_job_path(current_user, @job)
         else
@@ -27,7 +25,7 @@ class JobsController < ApplicationController
     end
 
     def edit
-        if current_user.id == session[:employer_id]
+        if user_posted?
             @job = Job.find_by(id: params[:id])
             render :edit
         else
@@ -62,7 +60,7 @@ class JobsController < ApplicationController
                 @job = employer.jobs.find_by(id: params[:id])
                 redirect_to employer_jobs_path(employer), alert: "Job not found" if @job.nil?
             end
-        else
+        elsif
             @job = Job.find_by(id: params[:id])
         end
     end
