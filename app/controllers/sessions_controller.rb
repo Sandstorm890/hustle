@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+    layout 'layouts/sessions'
 
     def welcome
         if session[:user_id]
@@ -14,12 +15,6 @@ class SessionsController < ApplicationController
         @user = User.new
     end
 
-    def destroy 
-        session.delete(:user_id)
-        session.delete(:employer_id)
-        redirect_to '/'
-    end
-
     def create 
         if user = User.find_by(email: params[:email])
             if user && user.authenticate(params[:password])
@@ -33,6 +28,23 @@ class SessionsController < ApplicationController
             end
         else
             flash[:message] = "Invalid login. Please try again."
+            redirect_to '/login'
+        end
+    end
+
+    def destroy 
+        session.delete(:user_id)
+        session.delete(:employer_id)
+        redirect_to '/'
+    end
+
+    def omniauth
+        user = User.from_omniauth(request.env['omniauth.auth'])
+
+        if user.valid?
+            session[:user_id] = user.id
+            redirect_to user_path(user)
+        else
             redirect_to '/login'
         end
     end
