@@ -1,6 +1,7 @@
+<%= link_to "Home", '/' %>
+
 <h1>Log In Here!</h1>
 <%= render partial: "layouts/error", locals: {object: @user}  %>
-
 <%= form_tag('/login', method: "post") do %>
     <%= label_tag(:email, "Email:") %>
     <%= email_field_tag(:email) %><br><br>
@@ -9,3 +10,4 @@
 
     <%= submit_tag "Log In" %>
 <% end %>
+

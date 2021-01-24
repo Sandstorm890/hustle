@@ -2,8 +2,10 @@
 <%= render partial: "layouts/error", locals: {object: @employer}  %>
 
 <%= form_for(Employer.new, url:'/employer_signup')do |f|%>
-    <%= f.label :name %>
-    <%= f.text_field :name %><br><br>
+    <%= f.label :first_name %>
+    <%= f.text_field :first_name %><br><br>
+    <%= f.label :last_name %>
+    <%= f.text_field :last_name %><br><br>
     <%= f.label :username %>
     <%= f.text_field :username %><br><br>
     <%= f.label :email %>

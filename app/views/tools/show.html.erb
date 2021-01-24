@@ -2,4 +2,4 @@
 
 <p><%= current_tool.description %></p>
 
-<%= button_to 'Add/Remove from Toolbox', {:controller => "tools", :action => "update", :tool_id => params[:id]} , :method=>:put %>
+<%= button_to 'Add/Remove from Toolbox', {:controller => "tools", :action => "update", :tool_id => params[:id]} , :method=>:put, class:"btn btn-info" %><br>

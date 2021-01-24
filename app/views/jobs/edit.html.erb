@@ -1,2 +1,5 @@
 <h3>Edit Job</h3>
 <%= render partial: "job_form", locals: {object: @job}%>
+
+<%= button_to "Delete Job", job_path(@job), method: 'delete' %><br>
+

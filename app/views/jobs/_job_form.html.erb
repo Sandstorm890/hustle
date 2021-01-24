@@ -1,11 +1,12 @@
 <%= render partial: "layouts/error", locals: {object: @job}  %>
 
+
 <%= form_for(@job) do |f| %>
-    <%= f.label "Address:" %><br><br>
+    <%= f.label "Address:" %><br>
     <%= f.text_field :address %><br><br>
-    <%= f.label "Category:" %>
+    <%= f.label "Category: " %>
     <%= f.select :category, ["Construction", "Landscaping", "IT", "Computer Repair", "Catering"] %><br><br>
-    <%= f.label "Start Date:" %><br><br>
+    <%= f.label "Start Date: " %><br><br>
     <%= f.date_select :start_date %><br><br>
     <%= f.time_select :start_date, :ignore_date => true %><br><br>
     <%= f.label "End Date:" %><br><br>
@@ -13,7 +14,6 @@
     <%= f.time_select :end_date, :ignore_date => true %><br><br>
     <%= f.label "Rate:" %><br><br>
     <%= f.number_field :rate %><br><br>
-    <%= f.label "Requirements (placeholder)" %><br><br>
-    
+
     <%= f.submit %><br><br>
 <% end %>
