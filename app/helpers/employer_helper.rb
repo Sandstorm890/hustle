@@ -12,4 +12,8 @@ module EmployerHelper
         job.employer.id == session[:employer_id]
     end
 
+    def employer_full_name(employer)
+        "#{employer.first_name} #{employer.last_name}"
+    end
+
 end
