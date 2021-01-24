@@ -9,4 +9,8 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def user_posted?
+        current_job.employer == current_user
+    end
+
 end
