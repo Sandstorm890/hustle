@@ -1,23 +1,26 @@
 class JobsController < ApplicationController
+
     def index
         @jobs = Job.order(:category)
     end
 
     def new
-    
         if params[:employer_id] && !Employer.exists?(params[:employer_id])
             redirect_to jobs_path, alert: "Employer not found."
         else
             @job = Job.new(employer_id: params[:employer_id])
+            render :new
         end
     end
 
     def create
-        job = Job.new(jobs_params)
-        job.employer = current_user
-        if job.valid?
-            job.save
-            redirect_to employer_job_path(current_user, job)
+
+        @job = Job.new(jobs_params)
+        @job.employer = current_user
+        if @job.valid?
+            
+            @job.save
+            redirect_to employer_job_path(current_user, @job)
         else
             render :new
         end
@@ -87,6 +90,14 @@ class JobsController < ApplicationController
     end
 
     private
+
+    def current_job
+        if params[:employer_id]
+            @job = Job.find_by(id: params[:employer_id])
+        else
+            @job = Job.find_by(id: params[:id])
+        end
+    end
 
     def jobs_params
         params.require(:job).permit(:category, :start_date, :end_date, :rate, :requirements, :user_id, :employer_id, :address)
