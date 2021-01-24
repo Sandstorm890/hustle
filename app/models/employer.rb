@@ -1,7 +1,8 @@
 class Employer < ApplicationRecord
     has_many :jobs
     has_many :users, through: :jobs
-    validates :name, presence: true
+    validates :first_name, presence: true
+    validates :last_name, presence: true
     validates :email, presence: true, uniqueness: true
     validates :username, presence: true
     validates :company, presence: true
