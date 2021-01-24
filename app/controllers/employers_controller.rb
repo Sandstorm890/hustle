@@ -1,4 +1,5 @@
 class EmployersController < ApplicationController
+    layout :resolve_layout
     
     def index
         render :show
@@ -41,6 +42,15 @@ class EmployersController < ApplicationController
     end
 
     private
+
+    def resolve_layout
+        case action_name
+        when "new", "create"
+            "sessions"
+        else
+            "application"
+        end
+    end
 
     def employer_params
         params.require(:employer).permit(:first_name, :last_name, :username, :email, :password, :bio, :company)
