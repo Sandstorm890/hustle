@@ -1,4 +1,6 @@
+
 <p>Category: <%= @job.category %></p>
+<p>Employer: <%= @job.employer.company %></p>
 <p>Address: <%= @job.address %></p
 <p>Start: <%= start_date(@job) %></p>
 <p>End: <%= end_date(@job) %></p>
@@ -8,9 +10,11 @@
 
 <% if @job.users.any? %>
     <p>Current Crew:</p>
+    <ul>
     <% @job.users.each do |user| %>
-        <p><%= user.username %></p>
+        <li><%= worker_full_name(user) %></li>
     <% end %>
+    </ul>
 <% end %>
 
 <%= link_to 'Edit Job', edit_job_path(@job) if user_created_job?(@job)%><br><br>
