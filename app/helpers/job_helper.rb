@@ -8,10 +8,6 @@ module JobHelper
         end
     end
 
-    def user_posted?
-        current_job.employer == current_user
-    end
-
     def render_poster
         if user_posted?
             content_tag(:h2, "You posted this job")
