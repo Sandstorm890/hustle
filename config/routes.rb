@@ -14,14 +14,14 @@ Rails.application.routes.draw do
   get '/jobs/sort_by_rate', to: 'jobs#sort_by_rate'
   get '/auth/:provider/callback' => 'sessions#omniauth'
 
-  resources :users
+  resources :users, only: [:new, :create, :show]
   resources :employers do
-    resources :jobs
+    resources :jobs, only: [:new, :show, :edit, :create, :destroy]
   end
   resources :users do
-    resources :jobs
+    resources :jobs, only: [:update, :show, :add_or_remove_from_job]
   end
-  resources :employers
+  resources :employers, only: [:new, :create]
   resources :jobs
-  resources :tools
+  resources :tools, only: [:index, :show, :update]
 end
