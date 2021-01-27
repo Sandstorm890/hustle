@@ -1,8 +1,10 @@
 class User < ApplicationRecord
-    has_and_belongs_to_many :jobs
-    has_many :employers, through: :jobs
+    has_many :jobs_users
+    has_many :jobs, through: :jobs_users
     has_and_belongs_to_many :tools
-    has_many :skills
+    
+    # has_many :employers, through: :jobs_users
+    
     # validates :first_name, presence: true
     # validates :last_name, presence: true
     validates :email, presence: true, uniqueness: true

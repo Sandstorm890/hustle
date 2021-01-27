@@ -1,5 +1,6 @@
 class Job < ApplicationRecord
-    has_and_belongs_to_many :users
+    has_many :jobs_users
+    has_many :users, through: :jobs_users
     belongs_to :employer
 
     validates :address, presence: true
@@ -7,6 +8,8 @@ class Job < ApplicationRecord
     validates :start_date, presence: true
     validates :end_date, presence: true
     validates :rate, presence: true
+
+    
 
     def self.order_by_rate
         order(rate: :desc)
