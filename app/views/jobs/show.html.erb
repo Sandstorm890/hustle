@@ -1,8 +1,8 @@
 <p>Category: <%= @job.category %></p>
 <p>Employer: <%= @job.employer.company %></p>
 <p>Address: <%= @job.address %></p
-<p>Start: <%= start_date(@job) %></p>
-<p>End: <%= end_date(@job) %></p>
+<p>Start: <%= date_format(@job.start_date) %></p>
+<p>End: <%= date_format(@job.end_date) %></p>
 <p>Desired Rate: $<%= @job.rate %>0/hr</p>
 <%= render_job_bid %>
 <% if current_user?(params) %>
