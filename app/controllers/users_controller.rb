@@ -1,9 +1,10 @@
 class UsersController < ApplicationController
     layout :resolve_layout
+    
     def index
-        render :show
+        redirect_to user_path(current_user)
     end
-
+    
     def new
         @user = User.new
     end
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
 
     def show
         @user = User.find_by(id: params[:id])
-        if @user.nil?
+        if @user.nil? || @user != current_user
             redirect_to "/"
         else
             render :show
