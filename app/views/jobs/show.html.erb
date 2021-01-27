@@ -3,15 +3,25 @@
 <p>Address: <%= @job.address %></p
 <p>Start: <%= start_date(@job) %></p>
 <p>End: <%= end_date(@job) %></p>
-<p>Rate: $<%= @job.rate %>0/hr</p><br>
+<p>Desired Rate: $<%= @job.rate %>0/hr</p>
+<%= render_job_bid %>
+<% if current_user?(params) %>
+    <%= form_for(current_user.jobs_users.find_by(job_id: params[:id]), url: "/bid_update") do |f|%>
+        <%= hidden_field_tag(:user_id, params[:user_id]) %>
+        <%= hidden_field_tag(:job_id, params[:id]) %>
+        <%= f.label "Bid: " %>
+        <%= f.number_field :rate %>
 
+        <%= f.submit "Place Bid" %><br><br>
+    <% end %>
+<% end %>
 <%= (button_to 'Add/Remove Job', {:controller => "jobs", :action => "add_or_remove_from_job", :job_id => params[:id]} , :method=>:post) if worker?%><br>
 
 <% if @job.users.any? %>
     <p>Current Crew:</p>
     <ul>
     <% @job.users.each do |user| %>
-        <li><%= worker_full_name(user) %></li>
+        <li><%= worker_full_name(user) %><%= " - Bid: $#{job_bid_by_worker(user)}.00/hr" if employer? %></li>
     <% end %>
     </ul>
 <% end %>

@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   post '/sign_user_up', to: 'jobs#add_or_remove_from_job'
   get '/jobs/sort_by_rate', to: 'jobs#sort_by_rate'
   get '/auth/:provider/callback' => 'sessions#omniauth'
+  patch '/bid_update', to: 'jobs_users#update'
 
   resources :users, only: [:new, :create, :show]
   resources :employers do
@@ -22,6 +23,7 @@ Rails.application.routes.draw do
     resources :jobs, only: [:update, :show, :add_or_remove_from_job]
   end
   resources :employers, only: [:new, :create]
+  resources :jobs_users
   resources :jobs
   resources :tools, only: [:index, :show, :update]
 end
