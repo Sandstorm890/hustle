@@ -8,6 +8,10 @@ module JobHelper
         end
     end
 
+    def current_user?(params)
+        current_user.id == params[:user_id].to_i
+    end
+
     def render_poster
         if user_posted?
             content_tag(:h2, "You posted this job")
@@ -33,6 +37,37 @@ module JobHelper
     def end_date(job)
         job.end_date.strftime("%A, %b %e, at %l:%M %p")
     end
+
+    def job_user?
+        !!params[:user_id]
+    end
+
+    def job_bid_by_worker(worker)
+        
+        worker.jobs_users.find_by(job_id: params[:id]).rate.to_i
+    end
+
+    def job_bid
+        if worker?
+            if current_user.jobs_users.find_by(job_id: params[:id]).nil?
+                nil
+            else
+                current_user.jobs_users.find_by(job_id: params[:id]).rate
+            end
+        end
+    end
+
+    def render_job_bid
+        if job_bid
+            content_tag(:p, "Your Bid: $#{job_bid}.00/hr")
+        else
+            nil
+        end
+    end
+
+    # def job_user_by_current_user(job)
+    #     job.jobs_users.users.find_by(id: params[:user_id])
+    # end
 
     # def employer_of_current_job(job)
     #     @employer = Employer.find_by(id: job.employer_id)
