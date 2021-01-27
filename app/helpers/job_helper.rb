@@ -30,20 +30,15 @@ module JobHelper
         @jobs = Job.all
     end
 
-    def start_date(job)
-        job.start_date.strftime("%A, %b %e, at %l:%M %p")
+    def date_format(date)
+        date.strftime("%A, %b %e, at %l:%M %p")
     end
-
-    def end_date(job)
-        job.end_date.strftime("%A, %b %e, at %l:%M %p")
-    end
-
+    
     def job_user?
         !!params[:user_id]
     end
 
     def job_bid_by_worker(worker)
-        
         worker.jobs_users.find_by(job_id: params[:id]).rate.to_i
     end
 
