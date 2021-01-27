@@ -1,11 +1,11 @@
-<%= link_to "Home", '/' %>
+<%= link_to "Back", '/' %>
 
 <h1>Log In Here!</h1>
 <%= render partial: "layouts/error", locals: {object: @user}  %>
 <%= form_tag('/login', method: "post") do %>
-    <%= label_tag(:email, "Email:") %>
+    <div class="lead"><%= label_tag :email %></div>
     <%= email_field_tag(:email) %><br><br>
-    <%= label_tag(:password, "Password") %>
+    <div class="lead"><%= label_tag(:password, "Password") %></div>
     <%= password_field_tag(:password) %><br><br>
 
     <%= submit_tag "Log In" %>
