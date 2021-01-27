@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>Hustle</title>
@@ -11,7 +11,7 @@
     <div class="container-fluid">
       <div class="navbar-text navbar-fixed-top mb-2"><%= "Signed in as " + show_logged_in if logged_in? %></div><br>
       
-      <ul class="nav nav-tabs">
+      <ul class="nav nav-tabs mb-2">
         <li class="pr-1"><%= link_to "Home", employer_path(current_user.id) if employer? %></li>
         <li class="pr-1"><%= link_to "Home", user_path(current_user.id) if worker? %></li><li>|</li>
         <li class="pl-1 pr-1"><%= link_to "Jobs", jobs_path if logged_in? %></li><li>|</li>
@@ -21,9 +21,9 @@
           
       <%= yield %>
 
-      <ul class="nav navbar-nav navbar-bottom">
-        <li><%= button_to "Logout", logout_path, method: 'delete', class: "btn btn-primary" if logged_in?%></li>
-      </ul>
+      
+      <%= button_to "Logout", logout_path, method: 'delete', class: "btn btn-primary" if logged_in?%>
+      
       
     </div>
   </body>
