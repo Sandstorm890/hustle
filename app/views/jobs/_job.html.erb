@@ -1,1 +1,1 @@
-<p><%= link_to(job.employer.company + " - " + job.category + " - " + "$" + job.rate.to_s + "0/hr", job_path(job.id) ) %></p>
+<p><%= link_to(job.display_link_info, job_path(job.id)) %></p>
