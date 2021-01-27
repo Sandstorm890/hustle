@@ -14,4 +14,8 @@ class Job < ApplicationRecord
     def self.order_by_rate
         order(rate: :desc)
     end
+
+    def display_link_info
+        self.employer.company + " - " + self.category + " - " + "$" + self.rate.to_s + "0/hr"
+    end
 end
