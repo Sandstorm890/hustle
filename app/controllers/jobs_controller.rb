@@ -42,23 +42,27 @@ class JobsController < ApplicationController
                     job.users.delete(current_user)
                 end
             end
-            job.save
+            job.save            
+            redirect_to job_path(job)
+
         elsif !job.users.include?(current_user)
             job.users << current_user
             job.save
             current_user.save
+            redirect_to user_job_path(current_user, job)
         end
-        redirect_to job_path(job)
+                    
+
     end
 
     def show
         if params[:employer_id]
             employer = Employer.find_by(id: params[:employer_id])
-            if employer.nil?
-                redirect_to jobs_path, alert: "Employer not found"
+            if employer.nil? || employer != current_user || current_job.nil?
+                redirect_to employer_path(current_user)
             else
                 @job = employer.jobs.find_by(id: params[:id])
-                redirect_to employer_jobs_path(employer), alert: "Job not found" if @job.nil?
+                redirect_to employer_jobs_path(employer) if @job.nil?
             end
         elsif
             @job = Job.find_by(id: params[:id])
@@ -90,11 +94,11 @@ class JobsController < ApplicationController
     private
 
     def current_job
-        if params[:employer_id]
-            @job = Job.find_by(id: params[:employer_id])
-        else
+        # if params[:employer_id]
+        #     @job = Job.find_by(id: params[:employer_id])
+        # else
             @job = Job.find_by(id: params[:id])
-        end
+        # end
     end
 
     def jobs_params
