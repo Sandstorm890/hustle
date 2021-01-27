@@ -94,11 +94,7 @@ class JobsController < ApplicationController
     private
 
     def current_job
-        # if params[:employer_id]
-        #     @job = Job.find_by(id: params[:employer_id])
-        # else
-            @job = Job.find_by(id: params[:id])
-        # end
+        @job = Job.find_by(id: params[:id])
     end
 
     def jobs_params
