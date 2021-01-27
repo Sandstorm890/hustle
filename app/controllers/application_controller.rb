@@ -9,8 +9,14 @@ class ApplicationController < ActionController::Base
         end
     end
 
+    def current_user?(params)
+        current_user.id == params[:user_id].to_i
+    end
+
     def user_posted?
         current_job.employer == current_user
     end
+
+    
 
 end
