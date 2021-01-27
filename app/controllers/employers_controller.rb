@@ -2,7 +2,7 @@ class EmployersController < ApplicationController
     layout :resolve_layout
     
     def index
-        render :show
+        redirect_to employer_path(current_user)
     end
 
     def new
@@ -22,7 +22,7 @@ class EmployersController < ApplicationController
 
     def show
         if params[:id].to_i != session[:employer_id]
-            redirect_to jobs_path
+            redirect_to employer_path(current_user)
         else
             employer = Employer.find_by(id: params[:id])
             @job = employer.jobs.find_by(id: params[:id])
