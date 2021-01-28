@@ -59,13 +59,4 @@ module JobHelper
             nil
         end
     end
-
-    # def job_user_by_current_user(job)
-    #     job.jobs_users.users.find_by(id: params[:user_id])
-    # end
-
-    # def employer_of_current_job(job)
-    #     @employer = Employer.find_by(id: job.employer_id)
-    # end
-
 end
