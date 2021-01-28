@@ -21,7 +21,7 @@
     <p>Current Crew:</p>
     <ul>
     <% @job.users.each do |user| %>
-        <li><%= worker_full_name(user) %><%= " - Bid: $#{job_bid_by_worker(user)}.00/hr" if employer? %></li>
+        <li><%= user_full_name(user) %><%= " - Bid: $#{job_bid_by_worker(user)}.00/hr" if employer? %></li>
     <% end %>
     </ul>
 <% end %>
