@@ -12,7 +12,11 @@ module UserHelper
         !!session[:user_id]
     end 
 
-    def worker_full_name(user)
+    def user_full_name(user)
         "#{user.first_name} #{user.last_name}"
     end
+
+    # def worker_full_name(user)
+    #     "#{user.first_name} #{user.last_name}"
+    # end
 end
