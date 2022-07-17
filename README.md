@@ -2,6 +2,9 @@
 
 Rails Webapp Project - Zayne Goering 1/24/2021
 
+Video Walkthrough:
+https://youtu.be/pQ6SuCUwSg4
+
 Description:
 
 This webapp allows users to browse and sign up for jobs that other users (employers) post.
