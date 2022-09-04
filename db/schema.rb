@@ -31,10 +31,10 @@ ActiveRecord::Schema.define(version: 2021_01_24_005743) do
     t.datetime "end_date"
     t.float "rate"
     t.string "requirements"
+    t.integer "user_id"
     t.integer "employer_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "user_id"
     t.string "address"
   end
 
@@ -78,8 +78,8 @@ ActiveRecord::Schema.define(version: 2021_01_24_005743) do
     t.text "bio"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "tool_id"
     t.integer "job_id"
+    t.integer "tool_id"
     t.string "uid"
     t.string "provider"
     t.string "first_name"
