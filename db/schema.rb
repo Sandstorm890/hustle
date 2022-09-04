@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2021_01_24_005743) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "employers", force: :cascade do |t|
     t.string "email"
     t.string "password_digest"
@@ -39,8 +42,8 @@ ActiveRecord::Schema.define(version: 2021_01_24_005743) do
   end
 
   create_table "jobs_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "job_id"
+    t.bigint "user_id"
+    t.bigint "job_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["job_id"], name: "index_jobs_users_on_job_id"
@@ -63,8 +66,8 @@ ActiveRecord::Schema.define(version: 2021_01_24_005743) do
   end
 
   create_table "tools_users", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "tool_id"
+    t.bigint "user_id"
+    t.bigint "tool_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["tool_id"], name: "index_tools_users_on_tool_id"
